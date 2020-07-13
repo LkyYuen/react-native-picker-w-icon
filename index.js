@@ -38,12 +38,15 @@ import React, {
       accessible: PropTypes.bool,
       animated: PropTypes.bool,
       localImage: PropTypes.bool,
+      showItemSeparator: PropTypes.bool,
+      showsVerticalScrollIndicator: PropTypes.bool,
       showsVerticalScrollIndicator: PropTypes.bool,
       keyboardShouldPersistTaps: PropTypes.string,
   
       style: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
       textStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
       dropdownStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
+      iconStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
       dropdownTextStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
       dropdownTextHighlightStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
   
@@ -65,6 +68,7 @@ import React, {
       options: null,
       animated: true,
       localImage: true,
+      showItemSeparator: false,
       showsVerticalScrollIndicator: false,
       keyboardShouldPersistTaps: 'never'
     };
@@ -162,7 +166,7 @@ import React, {
     }
   
     _renderButton() {
-      const {localImage, disabled, accessible, children, textStyle, dropDownIcon, labelKey, iconKey, labelPrefix, pickerIconStyle, defaultIcon} = this.props;
+      const {localImage, disabled, accessible, children, textStyle, dropDownIcon, labelKey, iconKey, labelPrefix, pickerIconStyle, iconStyle} = this.props;
       const {buttonText, selectedObject} = this.state;
 
       return (
@@ -175,17 +179,10 @@ import React, {
             children ||
             (
               <View style={styles.button}>
-                {/* <Image
-                  source={{ uri: R.images[selectedObject[iconKey]] || R.images.languageMalaysia }}
-                  style={{ width: 30, height: 30 }}
-                /> */}
                 <Image
                   source={localImage ? selectedObject[iconKey] : { uri: selectedObject[iconKey] }}
-                  style={{ width: 30, height: 30 }}
+                  style={[styles.iconStyle, iconStyle]}
                 />
-                {/* {
-                  defaultIcon || <View style={{ width: 30, height: 30 }} />
-                } */}
                 <Text style={[styles.buttonText, textStyle]} numberOfLines={1}>
                   {labelPrefix}{selectedObject[labelKey]}
                 </Text>
@@ -297,14 +294,14 @@ import React, {
     }
   
     _renderDropdown() {
-      const {scrollEnabled, showsVerticalScrollIndicator, keyboardShouldPersistTaps, options} = this.props;
+      const {scrollEnabled, showsVerticalScrollIndicator, keyboardShouldPersistTaps, options, showItemSeparator} = this.props;
       const Separator = <View style={styles.separator} />
       return (
         <FlatList
           scrollEnabled={scrollEnabled}
           style={styles.list}
           // dataSource={this._dataSource}
-        //   ItemSeparatorComponent={this._renderSeparator}
+          ItemSeparatorComponent={ showItemSeparator ? this._renderSeparator : null}
           data={options}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderRow}
@@ -386,18 +383,14 @@ import React, {
     _onRowPress(rowData, rowID) {
       const {onSelect, renderButtonText, onDropdownWillHide} = this.props;
       if (!onSelect || onSelect(rowID, rowData) !== false) {
-        // highlightRow(sectionID, rowID);
-        // const value = renderButtonText && renderButtonText(rowData) || rowData.toString();
         const value = renderButtonText && renderButtonText(rowData) || rowData;
         this._nextValue = value;
         this._nextIndex = rowID;
         this._nextObject = {};
         this.setState({
-          // buttonText: value,
           selectedObject: value,
           selectedIndex: rowID
         });
-        console.log("value ", value)
       }
       if (!onDropdownWillHide || onDropdownWillHide() !== false) {
         this.setState({
@@ -416,6 +409,10 @@ import React, {
       color: 'grey',
       width: 23,
       height: 28
+    },
+    iconStyle: {
+      width: 30,
+      height: 30
     },
     button: {
       justifyContent: 'space-evenly',

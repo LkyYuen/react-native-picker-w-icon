@@ -63,3 +63,30 @@ const PickerWIconApp = props => {
     )
 }
 ```
+
+## Props
+
+Prop                  | Type      | Required | Default                   | Description
+--------------------- | --------- | -------- | ------------------------- | -----------
+options               | Array     | Yes      |                           | Array of objects to select
+disabled              | bool      | Yes      | false                     | Disables interaction with the component
+scrollEnabled         | bool      | Yes      | true                      | Scrollable
+showItemSeparator     | bool      | No       | false                     | Show item separator between dropdown item
+defaultValue          | object    | No       | options[0]                | Default selected value
+animated              | bool      | Yes      | true                      | Animation of showing the dropdown list
+localImage            | bool      | Yes      | true                      | Source of icon/image is local
+showsVerticalScrollIndicator    | bool | Yes      | false                          | Show vertical scroll indicator of the list
+style                 | [style](http://facebook.github.io/react-native/docs/view.html#style)     | No      |                           | The style applied to the option container
+textStyle             | [style](https://reactnative.dev/docs/text-style-props)     | No      |                           | The style applied to the option label
+dropdownStyle         | [style](http://facebook.github.io/react-native/docs/view.html#style) | No      |                           | The style of the dropdown
+dropdownTextStyle     | [style](https://reactnative.dev/docs/text-style-props) | No      |                           | The style of the drop down text
+pickerIconStyle       | [style](http://facebook.github.io/react-native/docs/view.html#style) | No      |                           | The style of the picker icon
+iconKey               | string    | Yes      |                           | The key property of the icon
+labelKey              | string    | Yes      |                           | The key property of the label
+labelPrefix           | string    | No       |                           | The prefix of the label
+renderRow             | component | Yes      |                           | The component to show in the dropdown
+dropDownIcon          | component | No       |                           | The dropdown icon component
+
+---
+
+**MIT Licensed**
