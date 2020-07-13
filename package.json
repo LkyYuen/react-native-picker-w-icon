@@ -2,7 +2,7 @@
   "name": "react-native-picker-w-icon",
   "title": "React Native Picker W Icon",
   "version": "1.0.0",
-  "description": "TODO",
+  "description": "React Native Picker with Icon",
   "main": "index.js",
   "files": [
     "README.md",

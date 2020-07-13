@@ -65,7 +65,7 @@ import React, {
       options: null,
       animated: true,
       localImage: true,
-      showsVerticalScrollIndicator: true,
+      showsVerticalScrollIndicator: false,
       keyboardShouldPersistTaps: 'never'
     };
   
