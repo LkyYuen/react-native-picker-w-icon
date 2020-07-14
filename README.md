@@ -35,33 +35,67 @@ const PickerWIconApp = props => {
     const [value, setValue] = useState(undefined);
 
     return (
-        <PickerWIcon
-            options={telCodes}
-            dropdownStyle={{ height: (50 + StyleSheet.hairlineWidth) * telCodes.length }}
-            pickerIconStyle={{ color: 'grey', width: 23, height: 28 }}
-            defaultValue={telCodes[0]}
-            onSelect={(index, value) => setValue(value)}
-            iconKey={"icon"}
-            labelKey={"code"}
-            renderRow={
-                <View>
-                    <Image
-                        source={{ uri: telCodes[0].icon }}
-                        style={{ width: 30, height: 30 }}
-                        resizeMode={'cover'}
-                    />
-                    <Text numberOfLines={1}>
-                        {telCodes[0].code}
-                    </Text>
-                    <Icon
-                        name="md-arrow-dropdown"
-                        style={{ color: 'transparent' }}
-                    />
-                </View>
-            }
-        />
+      <PickerWIcon
+        options={telCodes}
+        dropdownStyle={{ height: (50 + StyleSheet.hairlineWidth) * telCodes.length }}
+        defaultValue={telCodes[0]}
+        onSelect={(index, value) => setValue(value)}
+        renderRow={
+          <View>
+            <Image
+              source={{ uri: telCodes[0].icon }}
+              style={{ width: 30, height: 30 }}
+              resizeMode={'cover'}
+            />
+            <Text numberOfLines={1}>
+              {telCodes[0].code}
+            </Text>
+            <Icon
+              name="md-arrow-dropdown"
+              style={{ color: 'transparent' }}
+            />
+          </View>
+        }
+        selected={
+          <View style={styles.button}>
+            <Image
+              source={{ uri: telCodes[0].icon }}
+              style={styles.iconStyle}
+            />
+            <Text style={styles.buttonText} numberOfLines={1}>
+              {telCodes[0].code}
+            </Text>
+            <Icon
+              name="md-caret-down"
+              style={styles.pickerIcon}
+            />
+          </View>
+        }
+      />
     )
 }
+
+var styles = StyleSheet.create({
+    button: {
+      justifyContent: 'space-evenly',
+      alignItems: 'center',
+      flexDirection: 'row',
+      height: 50
+    },
+    buttonText: {
+      fontSize: 16,
+      color: 'white'
+    },
+    pickerIcon: {
+      color: 'grey',
+      width: 23,
+      height: 28
+    },
+    iconStyle: {
+      width: 30,
+      height: 30
+    },
+});
 ```
 
 ## Props
@@ -69,23 +103,17 @@ const PickerWIconApp = props => {
 Prop                  | Type      | Required | Default                   | Description
 --------------------- | --------- | -------- | ------------------------- | -----------
 options               | Array     | Yes      |                           | Array of objects to select
-disabled              | bool      | Yes      | false                     | Disables interaction with the component
-scrollEnabled         | bool      | Yes      | true                      | Scrollable
+selected              | component | Yes      |                           | The selected component
+renderRow             | component | Yes      |                           | The component to show in the dropdown
+disabled              | bool      | No       | false                     | Disables interaction with the component
+scrollEnabled         | bool      | No       | true                      | Scrollable
 showItemSeparator     | bool      | No       | false                     | Show item separator between dropdown item
 defaultValue          | object    | No       | options[0]                | Default selected value
-animated              | bool      | Yes      | true                      | Animation of showing the dropdown list
-localImage            | bool      | Yes      | true                      | Source of icon/image is local
-showsVerticalScrollIndicator    | bool | Yes      | false                          | Show vertical scroll indicator of the list
+animated              | bool      | No       | true                      | Animation of showing the dropdown list
+showsVerticalScrollIndicator    | bool | No      | false                          | Show vertical scroll indicator of the list
 style                 | [style](http://facebook.github.io/react-native/docs/view.html#style)     | No      |                           | The style applied to the option container
-textStyle             | [style](https://reactnative.dev/docs/text-style-props)     | No      |                           | The style applied to the option label
 dropdownStyle         | [style](http://facebook.github.io/react-native/docs/view.html#style) | No      |                           | The style of the dropdown
 dropdownTextStyle     | [style](https://reactnative.dev/docs/text-style-props) | No      |                           | The style of the drop down text
-pickerIconStyle       | [style](http://facebook.github.io/react-native/docs/view.html#style) | No      |                           | The style of the picker icon
-iconKey               | string    | Yes      |                           | The key property of the icon
-labelKey              | string    | Yes      |                           | The key property of the label
-labelPrefix           | string    | No       |                           | The prefix of the label
-renderRow             | component | Yes      |                           | The component to show in the dropdown
-dropDownIcon          | component | No       |                           | The dropdown icon component
 
 ---
 

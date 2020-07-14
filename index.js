@@ -37,16 +37,13 @@ import React, {
   
       accessible: PropTypes.bool,
       animated: PropTypes.bool,
-      localImage: PropTypes.bool,
       showItemSeparator: PropTypes.bool,
       showsVerticalScrollIndicator: PropTypes.bool,
       showsVerticalScrollIndicator: PropTypes.bool,
       keyboardShouldPersistTaps: PropTypes.string,
   
       style: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
-      textStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
       dropdownStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
-      iconStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
       dropdownTextStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
       dropdownTextHighlightStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array]),
   
@@ -166,8 +163,7 @@ import React, {
     }
   
     _renderButton() {
-      const {localImage, disabled, accessible, children, textStyle, dropDownIcon, labelKey, iconKey, labelPrefix, pickerIconStyle, iconStyle} = this.props;
-      const {buttonText, selectedObject} = this.state;
+      const {disabled, accessible, selected} = this.props;
 
       return (
         <TouchableOpacity ref={button => this._button = button}
@@ -175,27 +171,7 @@ import React, {
           accessible={accessible}
           onPress={this._onButtonPress}
         >
-          {
-            children ||
-            (
-              <View style={styles.button}>
-                <Image
-                  source={localImage ? selectedObject[iconKey] : { uri: selectedObject[iconKey] }}
-                  style={[styles.iconStyle, iconStyle]}
-                />
-                <Text style={[styles.buttonText, textStyle]} numberOfLines={1}>
-                  {labelPrefix}{selectedObject[labelKey]}
-                </Text>
-                {
-                  dropDownIcon || 
-                  <Icon
-                    name="md-caret-down"
-                    style={pickerIconStyle || styles.pickerIcon}
-                  />
-                }
-              </View>
-            )
-          }
+          {selected}
         </TouchableOpacity>
       );
     }
@@ -405,25 +381,6 @@ import React, {
   }
   
   const styles = StyleSheet.create({
-    pickerIcon: {
-      color: 'grey',
-      width: 23,
-      height: 28
-    },
-    iconStyle: {
-      width: 30,
-      height: 30
-    },
-    button: {
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      flexDirection: 'row',
-      height: 50
-    },
-    buttonText: {
-      fontSize: 16,
-      color: 'white'
-    },
     modal: {
       flexGrow: 1
     },
