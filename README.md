@@ -59,11 +59,11 @@ const PickerWIconApp = props => {
         selected={
           <View style={styles.button}>
             <Image
-              source={{ uri: telCodes[0].icon }}
+              source={{ uri: value.icon }}
               style={styles.iconStyle}
             />
             <Text style={styles.buttonText} numberOfLines={1}>
-              {telCodes[0].code}
+              {value.code}
             </Text>
             <Icon
               name="md-caret-down"
