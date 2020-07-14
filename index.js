@@ -17,7 +17,6 @@ import React, {
     Image
   } from 'react-native';
   
-  import { Icon } from "native-base";
   import PropTypes from 'prop-types';
   
   const TOUCHABLE_ELEMENTS = [
@@ -84,7 +83,7 @@ import React, {
         showDropdown: false,
         buttonText: props.defaultValue,
         selectedIndex: props.defaultIndex,
-        selectedObject: props.defaultValue
+        selectedObject: props.defaultValue || props.options[0]
       };
     }
   
